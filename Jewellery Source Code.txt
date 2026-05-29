@@ -1,0 +1,190 @@
+            Login Button Code
+
+            if (string.IsNullOrWhiteSpace(txtUsername.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                MessageBox.Show("Please enter username and password");
+                return;
+            }
+
+
+            SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=ShopDB;Integrated Security=True;TrustServerCertificate=True");
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM logintab WHERE UserName=@username AND Password=@password", con);
+
+
+            cmd.Parameters.AddWithValue("@username", txtUsername.Text.Trim());
+            cmd.Parameters.AddWithValue("@password", txtPassword.Text.Trim());
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            if (dt.Rows.Count > 0)
+            {
+                Main mn = new Main();
+                mn.Show();
+            }
+            else
+            {
+                MessageBox.Show("Invalid Login please check username and password");
+            }
+
+            con.Close();
+
+
+
+            Save Code
+            
+            SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=ShopDB;Integrated Security=True;TrustServerCertificate=True");
+            con.Open();
+
+            SqlCommand cnn = new SqlCommand("insert into products Values(@productid,@product_name,@price,@quantity)", con);
+
+            cnn.Parameters.AddWithValue("@productid", int.Parse(textBox1.Text));
+            cnn.Parameters.AddWithValue("@product_name", textBox2.Text);
+
+            cnn.Parameters.AddWithValue("@price", int.Parse(textBox3.Text));
+
+            cnn.Parameters.AddWithValue("@quantity", textBox4.Text);
+
+            cnn.ExecuteNonQuery();
+            con.Close();
+
+            MessageBox.Show("Record Saved");
+            
+
+
+        
+            Add Code
+        
+            SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=ShopDB;Integrated Security=True;TrustServerCertificate=True");
+            con.Open();
+
+            SqlCommand cnn = new SqlCommand("select * from products", con);
+
+            SqlDataAdapter da = new SqlDataAdapter(cnn);
+            DataTable table = new DataTable();
+            da.Fill(table);
+
+            dataGridView2.DataSource = table;
+            
+        
+
+            Update Code
+       
+            SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=ShopDB;Integrated Security=True;TrustServerCertificate=True");
+            con.Open();
+
+            SqlCommand cnn = new SqlCommand("update products set product_name=@product_name,price=@price,quantity=@quantity where productid=@productid", con);
+
+            cnn.Parameters.AddWithValue("@productid", int.Parse(textBox1.Text));
+            cnn.Parameters.AddWithValue("@product_name", textBox2.Text);
+
+            cnn.Parameters.AddWithValue("@price", int.Parse(textBox3.Text));
+
+            cnn.Parameters.AddWithValue("@quantity", textBox4.Text);
+
+            cnn.ExecuteNonQuery();
+            con.Close();
+            MessageBox.Show("Record Updated");
+        
+
+
+            Delete Code
+       
+            SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=ShopDB;Integrated Security=True;TrustServerCertificate=True");
+            con.Open();
+
+            SqlCommand cnn = new SqlCommand("delete from products where productid=@productid", con);
+
+            cnn.Parameters.AddWithValue("@productid", int.Parse(textBox1.Text));
+
+            cnn.ExecuteNonQuery();
+            con.Close();
+            MessageBox.Show("Record Deleted");
+        
+
+
+            Form Load Code
+        
+            SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=ShopDB;Integrated Security=True;TrustServerCertificate=True");
+            con.Open();
+
+            SqlCommand cnn = new SqlCommand("select * from products", con);
+
+            SqlDataAdapter da = new SqlDataAdapter(cnn);
+            DataTable table = new DataTable();
+            da.Fill(table);
+
+            dataGridView2.DataSource = table;
+
+
+
+
+            Dashboard Code
+
+            display1 code
+
+            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-DASLLN7;Initial Catalog=CafeDB;Integrated Security=True;TrustServerCertificate=True");
+            con.Open();
+            SqlCommand comm = new SqlCommand("SELECT COUNT(*) FROM customers", con);
+            Int32 count = Convert.ToInt32(comm.ExecuteScalar());
+            if (count > 0)
+            {
+                lblCount1.Text = Convert.ToString(count.ToString()); //For example a Label
+            }
+            else
+            {
+                lblCount1.Text = "0";
+            }
+            con.Close(); //Remember close the connection
+
+
+
+            display2 code
+
+            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-DASLLN7;Initial Catalog=CafeDB;Integrated Security=True;TrustServerCertificate=True");
+            con.Open();
+            SqlCommand comm = new SqlCommand("SELECT COUNT(*) FROM orders", con);
+            Int32 count = Convert.ToInt32(comm.ExecuteScalar());
+            if (count > 0)
+            {
+                lblCount2.Text = Convert.ToString(count.ToString()); //For example a Label
+            }
+            else
+            {
+                lblCount2.Text = "0";
+            }
+            con.Close(); //Remember close the connection
+
+
+
+           display3 code
+
+
+           SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-DASLLN7;Initial Catalog=CafeDB;Integrated Security=True;TrustServerCertificate=True");
+            con.Open();
+            SqlCommand comm = new SqlCommand("SELECT COUNT(*) FROM products", con);
+            Int32 count = Convert.ToInt32(comm.ExecuteScalar());
+            if (count > 0)
+            {
+                lblCount3.Text = Convert.ToString(count.ToString()); //For example a Label
+            }
+            else
+            {
+                lblCount3.Text = "0";
+            }
+            con.Close(); //Remember close the connection
+
+
+
+            
+
+            
+        
+
+       
+
+   
+
